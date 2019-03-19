@@ -19,8 +19,8 @@ const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
 const { FACEBOOK_ACCESS_TOKEN } = process.env;
 
-console.log(`Private Ket: ${credentials.private_key}
-Cliente Email: ${credentials.client_email}
+console.log(`Private Ket: ${config.credentials.private_key}
+Cliente Email: ${config.credentials.client_email}
 Facebook Token: ${FACEBOOK_ACCESS_TOKEN}`);
 
 const sendTextMessage = (userId, text) => {
