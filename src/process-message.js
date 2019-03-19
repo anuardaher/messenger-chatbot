@@ -19,11 +19,12 @@ const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
 const { FACEBOOK_ACCESS_TOKEN } = process.env;
 
-console.log(`Private Ket: ${config.credentials.private_key}
-Cliente Email: ${config.credentials.client_email}
-Facebook Token: ${FACEBOOK_ACCESS_TOKEN}`);
+// console.log(`Private Ket: ${config.credentials.private_key}
+// Cliente Email: ${config.credentials.client_email}
+// Facebook Token: ${FACEBOOK_ACCESS_TOKEN}`);
 
 const sendTextMessage = (userId, text) => {
+    console.log(`Enviando mensagem de volta: ${text}`);
     return fetch(
         `https://graph.facebook.com/v2.6/me/messages?access_token=${FACEBOOK_ACCESS_TOKEN}`, {
             headers: {
