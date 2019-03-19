@@ -19,6 +19,10 @@ const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
 const { FACEBOOK_ACCESS_TOKEN } = process.env;
 
+console.log(`Private Ket: ${credentials.private_key}
+Cliente Email: ${credentials.client_email}
+Facebook Token: ${FACEBOOK_ACCESS_TOKEN}`);
+
 const sendTextMessage = (userId, text) => {
     return fetch(
         `https://graph.facebook.com/v2.6/me/messages?access_token=${FACEBOOK_ACCESS_TOKEN}`, {
@@ -52,6 +56,8 @@ module.exports = (event) => {
             },
         },
     };
+
+    console.log(`Mensagem recebida: ${message}`);
 
     sessionClient
         .detectIntent(request)
