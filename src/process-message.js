@@ -41,7 +41,7 @@ const sendTextMessage = (userId, text) => {
                 },
             }),
         }
-    );
+    ).catch(err => console.error(err));;
 }
 
 module.exports = (event) => {
