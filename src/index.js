@@ -5,7 +5,7 @@ const verifyWebhook = require('./verify-webhook');
 const messageWebhook = require('./message-webhook');
 
 const app = express();
-let port = 3000;
+let port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
