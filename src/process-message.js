@@ -24,9 +24,10 @@ const { FACEBOOK_ACCESS_TOKEN } = process.env;
 // Facebook Token: ${FACEBOOK_ACCESS_TOKEN}`);
 
 const sendTextMessage = (userId, text) => {
-    console.log(`Enviando mensagem de volta: ${text}`);
+    console.log(`Mensagem retornada pelo Dialogflow: ${text}`);
+
     return fetch(
-            `https://graph.facebook.com/v2.6/me/messages?access_token=${FACEBOOK_ACCESS_TOKEN}`, {
+            `https://graph.facebook.com/v2.8/me/messages?access_token=${FACEBOOK_ACCESS_TOKEN}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -41,7 +42,10 @@ const sendTextMessage = (userId, text) => {
                     },
                 }),
             }
-        ).then(res => console.log(res))
+        ).then(res => {
+            if (res.status != 200)
+                console.error(`Mensagem não pôde ser enviada. ${res.status} ${res.statusText}`);
+        })
         .catch(err => console.error(err));
 }
 
