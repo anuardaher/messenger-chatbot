@@ -1,67 +1,46 @@
-'use strict'
-
 const { WebhookClient } = require('dialogflow-fulfillment')
-const axios = require("axios")
 
-module.exports = async(request, response) => {
+const processModule = require("../src/modules/processModule")
+const denunciaModule = require("../src/modules/denunciaModule")
+const consultaDenunciaModule = require("../src/modules/consultaDenunciaModule")
+
+module.exports = (request, response) => {
     let body = request.body
     if (!body.queryResult) return;
-    let processNumber = body.queryResult.queryText;
+    let intent = body.queryResult.intent.displayName;
 
-    let token = await getAuthToken();
-    let process = await getProcessData(token, processNumber);
+    const setAnswer = async() => {
+        let answer;
+
+        switch (intent) {
+            case 'protocolo_processa_numero':
+                answer = await processModule(body.queryResult.queryText);
+                break;
+            case 'denunciar_som_alto - custom - yes':
+                let address = body.queryResult.outputContexts.pop();
+                answer = await denunciaModule(address.parameters);
+                break;
+            case 'consultar_denuncia - custom':
+                answer = await consultaDenunciaModule(body.queryResult.queryText);
+                break;
+            default:
+                console.warn(intent);
+                answer = "Não foi possível realizar essa operação. Tente mais tarde."
+                break;
+        }
+        sendResponse(answer);
+    }
+
+    const sendResponse = (answer) => {
+        agent.add(answer.getResponse());
+
+        if (answer.getQuick_reply())
+            agent.add(answer.getQuick_reply());
+    }
 
     const agent = new WebhookClient({ request, response });
 
-    const setAnswer = () => {
-        let answer = `Processo: ${process.numero_processo}
-        Remessa: ${process.numero_remessa}
-        Assunto: ${process.assunto}
-        Data da Remessa: ${process.data_remessa}
-        Destino: ${process.destino}
-        Observação: ${process.observacao || ''}`
-
-        agent.add(answer);
-    }
-
     let intentMap = new Map();
-    intentMap.set('protocolo_processa_numero', setAnswer)
+    intentMap.set(intent, setAnswer)
     agent.handleRequest(intentMap);
 };
-
-
-const getAuthToken = async() => {
-    const url = "https://sigp.aparecida.go.gov.br/sig/rest/loginController/validarLoginParaModuloPublico?modulo=servicosonline";
-    let response;
-    try {
-        response = await axios.get(url);
-    } catch (error) {
-        return new Error(error);
-    }
-
-    if (!response.data) return console.error("Erro ao buscar token");
-    return response.data.token;
-
-}
-
-const getProcessData = async(token, processNumber) => {
-    let response;
-    const url = 'https://sigp.aparecida.go.gov.br/sig/rest/processoController/pesquisarDetalhesProcesso'
-    let body = { "numero_processo": parseInt(processNumber) }
-    let config = {
-        method: 'post',
-        data: body,
-        headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
-    }
-    try {
-        response = await axios.post(url, body, config)
-    } catch (error) {
-        return new Error(error);
-    }
-
-    if (!response.data && response.data.length < 1) {
-        console.error("Array de andamento dos processos está vazio");
-        return;
-    }
-    return response.data.shift();
-}
