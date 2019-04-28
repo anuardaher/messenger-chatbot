@@ -2,9 +2,9 @@
     "name": "messenger-chatbot",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "server.js",
     "scripts": {
-        "start": "node src/index.js",
+        "start": "node server.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
@@ -17,6 +17,7 @@
         "dialogflow-fulfillment": "git+https://github.com/naranjja/dialogflow-fulfillment-nodejs.git",
         "express": "^4.16.4",
         "mongoose": "^5.5.2",
-        "mongoose-auto-increment": "^5.0.1"
+        "mongoose-auto-increment": "^5.0.1",
+        "nodemon": "^1.18.11"
     }
 }
