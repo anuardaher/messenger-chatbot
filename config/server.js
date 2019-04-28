@@ -1,4 +1,4 @@
-const app = require('./config/express')
+const app = require('./express')
 
 let port = process.env.PORT || 3000;
 
