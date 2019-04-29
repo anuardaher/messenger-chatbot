@@ -8,9 +8,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname, { dotfiles: 'allow' }))
 
-app.get('/', (req, res) => {
+app.get('/aparecidabot', (req, res) => {
     res.status(200).send("Olá! Sou um chatbot!")
 })
-app.post('/webhook', messageWebhook);
+app.post('/aparecidabot/webhook', messageWebhook);
 
 module.exports = app;
