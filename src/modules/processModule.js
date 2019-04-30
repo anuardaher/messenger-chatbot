@@ -9,7 +9,7 @@ module.exports = async(processo_numero) => {
         token = await getAuthToken();
         processo = await getProcessoData(token, processo_numero);
     } catch (e) {
-        throw new Error(error)
+        throw new Error(e)
     }
     return setProcessoAnswer(processo);
 }
@@ -19,12 +19,12 @@ const getAuthToken = async() => {
     let response;
     try {
         response = await axios.get(url);
-    } catch (error) {
-        throw new Error(error)
+    } catch (e) {
+        throw new Error(e)
     }
 
     if (!response.data) {
-        throw new Error(error)
+        throw new Error("Não foi possível obter o token")
     }
     return response.data.token
 }
@@ -40,8 +40,8 @@ const getProcessoData = async(token, numero_processo) => {
     }
     try {
         response = await axios.post(url, body, config)
-    } catch (error) {
-        throw new Error("Não foi possível completar essa operação. Tente mais tarde.")
+    } catch (e) {
+        throw new Error(e)
     }
 
     if (!response.data || response.data.length < 1) {
