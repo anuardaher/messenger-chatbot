@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Aparecida Chatbot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+
+<body class="text-center">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto">
+            <div class="inner">
+                <h3 class="masthead-brand">Anuar Daher</h3>
+                <nav class="nav nav-masthead justify-content-center">
+                    <a class="nav-link active" href="http://anuardaher.com">Voltar</a>
+                </nav>
+            </div>
+        </header>
+
+        <main role="main" class="inner cover">
+            <h1 class="cover-heading">Aparecida Chatbot</h1>
+            <p class="lead">Chatbot da Prefeitura de Aparecida de Goiânia. Desenvolvido para oferecer serviços públicos de forma mais rápida e interativa.</p>
+            <div id='iframe'>
+                <iframe src="../views/kommunicateIframe.html" frameborder="0" style="height:100%; width:100%;"></iframe>
+            </div>
+        </main>
+
+        <footer class="mastfoot mt-auto">
+            <div class="inner">
+                <p>Desenvolvido por <a href="https://anuardaher.com/">Anuar Daher </a><span id='ano'></span>.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        let anoDiv = document.getElementById('ano')
+        let anoAtual = new Date().getFullYear();
+        anoDiv.append(anoAtual);
+    })
+</script>
+
+</html>

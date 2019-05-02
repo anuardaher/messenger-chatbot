@@ -1,21 +1,32 @@
 const denunciaModel = require("../models/denunciaModel");
 const Answer = require("../answerClass")
 
-module.exports = async(numero_protocolo) => {
+module.exports = async(protocolNumber, context) => {
     let denuncia;
-    if (isNaN(numero_protocolo)) return new Answer("Número de protocolo inválido. Verifique se o número está correto");
-    try {
-        denuncia = await denunciaModel.findOne({ "protocolo": Number(numero_protocolo) })
-    } catch (e) {
-        console.error(e);
-        throw new Error(e)
-    }
-    let quick_reply = {
-        title: "Deseja consultar outra denúncia?",
-        reply: "Consultar"
+    let tryAgainMessage = "Número de denuncia inválido. Verifique se o número está correto e tente novamente"
+    let quickReply = { title: "Deseja continuar tentando?", reply: "Consultar" }
+
+    if (isNaN(protocolNumber)) {
+        if (context.lifespan) {
+            return new Answer(tryAgainMessage);
+        }
+        return new Answer(tryAgainMessage, quickReply);
     }
 
-    if (!denuncia) return new Answer("Não existe denúncia para esse protocolo. Confira se o número digitado está correto.", quick_reply)
+    try {
+        denuncia = await denunciaModel.findOne({ "protocolo": Number(protocolNumber) })
+    } catch (e) {
+        console.error(e.message);
+        throw new Answer("Oops, tivemos um problema e não foi possível localizar o processo", quickReply)
+    }
+
+
+    if (!denuncia) {
+        if (context.lifespan) {
+            return new Answer("Não existe denúncia para esse protocolo. Confira se o número digitado está correto e tente novamente.")
+        }
+        return new Answer("Não existe denúncia para esse protocolo. Confira se o número digitado está correto e tente novamente.", quickReply)
+    }
 
     let response = `Protocolo: ${denuncia.protocolo}.
 Status: ${denuncia.status}.
@@ -24,6 +35,8 @@ Endereço: ${denuncia.endereco.rua || ''}, qd: ${denuncia.endereco.quadra || ''}
         response = response.concat(`Observação: ${denuncia.observacao}.`)
     }
 
-
-    return new Answer(response, quick_reply);
+    return new Answer(response, {
+        title: "Deseja consultar outra denúncia?",
+        reply: "Consultar"
+    });
 }
