@@ -7,7 +7,7 @@ const app = express()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("src/public"))
+app.use("/aparecidabot", express.static("src/public"))
 
 app.get('/aparecidabot', (req, res) => {
     res.sendFile(path.join(__dirname, '../src/public/views/index.html'));
