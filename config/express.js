@@ -16,6 +16,7 @@ app.get('/aparecidabot', (req, res) => {
 app.post('/aparecidabot/webhook', messageWebhook);
 
 app.post('/aparecidabot/github', (req, res) => {
+    console.log("Realizando auto-deploy...")
     let sender = req.body.sender;
     let branch = req.body.ref;
     let githubUsername = "anuardaher"
@@ -32,6 +33,7 @@ const deploy = (res) => {
             return res.send(500);
         }
         res.send(200);
+        console.log("Deploy concluído com sucesso.")
     });
 }
 
