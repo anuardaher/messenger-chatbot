@@ -16,8 +16,9 @@ app.get('/aparecidabot', (req, res) => {
 app.post('/aparecidabot/webhook', messageWebhook);
 
 app.post('/aparecidabot/github', (req, res) => {
-    var sender = req.body.sender;
-    var branch = req.body.ref;
+    let sender = req.body.sender;
+    let branch = req.body.ref;
+    let githubUsername = "anuardaher"
 
     if (branch.indexOf('master') > -1 && sender.login === githubUsername) {
         deploy(res);
