@@ -127,6 +127,20 @@ body {
     margin-bottom: 30px;
 }
 
+@media screen and (max-width: 480px) {
+    .cover img {
+        margin-bottom: 10px;
+        max-width: 150px;
+        max-height: 150px;
+    }
+    .cover h1 {
+        font-size: 1.5rem;
+    }
+    .lead {
+        font-size: 1rem;
+    }
+}
+
 
 /*
  * Footer
