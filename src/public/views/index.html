@@ -4,10 +4,34 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="og:title" content="Aparecida Chatbot">
+    <meta property="og:description" content="Chatbot desenvolvido para a Prefeitura de Aparecida de Goiânia.">
+    <meta property="og:image" content="./images/robot.png">
+    <meta property="og:type" content="website">
     <title>Aparecida Chatbot</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="shortcut icon" href="./images/favicon.ico" />
+
+    <script type="text/javascript">
+        (function(d, m) {
+            var kommunicateSettings = {
+                "appId": "70af841d9c1a28361963acf525cbef05",
+                "popupWidget": true,
+                "conversationTitle": "Anuar Daher Neto ",
+                "automaticChatOpenOnNavigation": true
+            };
+            var s = document.createElement("script");
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://api.kommunicate.io/v2/kommunicate.app";
+            var h = document.getElementsByTagName("head")[0];
+            h.appendChild(s);
+            window.kommunicate = m;
+            m._globals = kommunicateSettings;
+        })(document, window.kommunicate || {});
+    </script>
 </head>
 
 <body class="text-center">
@@ -22,11 +46,10 @@
         </header>
 
         <main role="main" class="inner cover">
+            <img src="./images/robot.png" class="rounded mx-auto d-block">
             <h1 class="cover-heading">Aparecida Chatbot</h1>
             <p class="lead">Chatbot da Prefeitura de Aparecida de Goiânia. Desenvolvido para oferecer serviços públicos de forma mais rápida e interativa.</p>
-            <div id='iframe'>
-                <iframe src="./views/kommunicateIframe.html" frameborder="0" style="height:100%; width:100%;"></iframe>
-            </div>
+
         </main>
 
         <footer class="mastfoot mt-auto">

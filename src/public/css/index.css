@@ -40,7 +40,7 @@ a:hover {
 html,
 body {
     height: 100%;
-    background-color: #863636;
+    background-color: #3a3a3a;
 }
 
 body {
@@ -78,7 +78,6 @@ body {
 
 @media screen and (max-width: 600px) {
     .nav-link {
-        font-size: 0.8em;
         margin: 5px;
     }
 }
@@ -120,18 +119,12 @@ body {
     font-weight: 700;
 }
 
-#iframe {
-    height: 600px;
-}
-
-@media screen and (max-width: 600px) {
-    .cover h1 {
-        font-size: 2em;
-        margin-top: 10px;
-    }
-    #iframe {
-        height: 450px;
-    }
+.cover img {
+    width: auto;
+    height: auto;
+    max-width: 200px;
+    max-height: 200px;
+    margin-bottom: 30px;
 }
 
 
@@ -145,6 +138,6 @@ body {
 
 @media screen and (max-width: 600px) {
     .mastfoot p {
-        padding-top: 10px;
+        margin-bottom: 100px;
     }
 }
