@@ -40,7 +40,6 @@ module.exports = (request, response) => {
 
         if (webPlatform) {
             agent.add(new Payload('PLATFORM_UNSPECIFIED', webResponse(answer)));
-            agent.get
         } else {
             agent.add(appsResponse(answer))
         }
