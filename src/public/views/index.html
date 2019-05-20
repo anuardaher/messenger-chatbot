@@ -13,41 +13,32 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="shortcut icon" href="./images/favicon.ico" />
-
-    <script type="text/javascript">
-        (function(d, m) {
-            var kommunicateSettings = {
-                "appId": "70af841d9c1a28361963acf525cbef05",
-                "popupWidget": true,
-                "conversationTitle": "Anuar Daher Neto",
-                "automaticChatOpenOnNavigation": true,
-            };
-            if (!detectmob()) {
-                kommunicateSettings["onInit"] = function() {
-                    Kommunicate.launchConversation();
-                }
-            }
-            var s = document.createElement("script");
-            s.type = "text/javascript";
-            s.async = true;
-            s.src = "https://api.kommunicate.io/v2/kommunicate.app";
-            var h = document.getElementsByTagName("head")[0];
-            h.appendChild(s);
-            window.kommunicate = m;
-            m._globals = kommunicateSettings;
-        })(document, window.kommunicate || {});
-
-        function detectmob() {
-            if (window.innerWidth <= 800) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    </script>
 </head>
 
 <body class="text-center">
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml: true,
+                version: 'v3.3'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/pt_BR/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- Your customer chat code -->
+    <div class="fb-customerchat" attribution=setup_tool page_id="340100449962883" logged_in_greeting="Olá! Digite Oi para começarmos ;) " logged_out_greeting="Oi! Faça o login no Messenger para que eu possa te ajudar :)"></div>
+
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header class="masthead mb-auto">
             <div class="inner">
