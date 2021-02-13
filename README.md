@@ -1,2 +1,2 @@
 # messenger-chatbot
-Aplicação de um chatbot para o Facebook Messenger
+An API for a chatbot application for Facebook Messenger and Telegram.
